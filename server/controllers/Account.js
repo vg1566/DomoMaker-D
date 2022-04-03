@@ -57,7 +57,24 @@ const signup = async (req, res) => {
   }
 };
 
+const premium = async (req, res) => {
+  const isPremium = `${req.body.isPremium}`;
+  // I can't figure out how to save it to the account but I will figure it out for project 2
+
+  // const account = new Account({ });
+  // account.premium = isPremium;
+  req.session.account.premium = isPremium;
+  return res.json({ redirect: '/maker' });
+  // try {
+  //  await account.save();
+  //  req.session.account = Account.toAPI(account);
+
+  // }
+};
+
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });
+
+const getPremium = (req, res) => res.json({ premium: req.session.account.premium });
 
 module.exports = {
   loginPage,
@@ -65,4 +82,6 @@ module.exports = {
   logout,
   signup,
   getToken,
+  premium,
+  getPremium,
 };
